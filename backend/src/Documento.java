@@ -10,11 +10,11 @@ public class Documento {
     private String statusValidacao; // "pendente", "validado", "rejeitado"
     private String observacoes;
 
-    // Construtor padrão
     public Documento() {
+        this.statusValidacao = "pendente";
+        this.dataEnvio = LocalDateTime.now();
     }
 
-    // Construtor com parâmetros
     public Documento(int idDocumento, int idEmpresa,
                      String tipoDocumento, String caminhoArquivo) {
         this.idDocumento = idDocumento;
@@ -25,29 +25,29 @@ public class Documento {
         this.statusValidacao = "pendente";
     }
 
-    // Realiza o envio e registro do documento no sistema
     public void enviarDocumento() {
+        this.dataEnvio = LocalDateTime.now();
         System.out.println("Enviando documento do tipo '" + tipoDocumento
                 + "' para a empresa ID: " + idEmpresa);
     }
 
-    // Valida o documento enviado pela empresa
     public void validarDocumento() {
+        this.statusValidacao = "validado";
+        this.observacoes = "Documento validado com sucesso.";
         System.out.println("Validando documento ID: " + idDocumento);
     }
 
-    // Rejeita o documento e registra observação
     public void rejeitarDocumento(String motivo) {
+        this.statusValidacao = "rejeitado";
+        this.observacoes = motivo;
         System.out.println("Rejeitando documento ID: " + idDocumento + " - Motivo: " + motivo);
     }
 
-    // Consulta o status de validação do documento
     public String consultarStatus() {
         System.out.println("Consultando status do documento ID: " + idDocumento);
         return this.statusValidacao;
     }
 
-    // Getters e Setters
     public int getIdDocumento() { return idDocumento; }
     public void setIdDocumento(int idDocumento) { this.idDocumento = idDocumento; }
 

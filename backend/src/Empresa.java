@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Empresa {
+public class Empresa extends CadastroBase {
 
     private int idEmpresa;
     private String nomeEmpresa;
@@ -10,53 +10,44 @@ public class Empresa {
     private String setor;
     private LocalDate dataFundacao;
     private int idUsuario; // FK - proprietário da empresa
-    private String status; // "ativa", "inativa"
-    private LocalDateTime dataCriacao;
 
-    // Construtor padrão
     public Empresa() {
+        super("ativa", LocalDateTime.now());
     }
 
-    // Construtor com parâmetros
     public Empresa(int idEmpresa, String nomeEmpresa, String cnpj,
                    String razaoSocial, String setor, int idUsuario) {
+        super("ativa", LocalDateTime.now());
         this.idEmpresa = idEmpresa;
         this.nomeEmpresa = nomeEmpresa;
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
         this.setor = setor;
         this.idUsuario = idUsuario;
-        this.status = "ativa";
-        this.dataCriacao = LocalDateTime.now();
     }
 
-    // Cadastra uma nova empresa na plataforma
     public void cadastrar() {
         System.out.println("Executando cadastro da empresa: " + nomeEmpresa);
     }
 
-    // Atualiza os dados da empresa
     public void atualizar() {
         System.out.println("Atualizando dados da empresa: " + nomeEmpresa);
     }
 
-    // Inativa a empresa na plataforma
     public void inativar() {
+        setStatus("inativa");
         System.out.println("Inativando empresa: " + nomeEmpresa);
     }
 
-    // Busca empresa pelo CNPJ
     public static Empresa buscarPorCnpj(String cnpj) {
         System.out.println("Buscando empresa pelo CNPJ: " + cnpj);
         return null;
     }
 
-    // Lista todas as contas vinculadas à empresa
     public void listarContas() {
         System.out.println("Listando contas da empresa: " + nomeEmpresa);
     }
 
-    // Getters e Setters
     public int getIdEmpresa() { return idEmpresa; }
     public void setIdEmpresa(int idEmpresa) { this.idEmpresa = idEmpresa; }
 
@@ -77,10 +68,4 @@ public class Empresa {
 
     public int getIdUsuario() { return idUsuario; }
     public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-
-    public LocalDateTime getDataCriacao() { return dataCriacao; }
-    public void setDataCriacao(LocalDateTime dataCriacao) { this.dataCriacao = dataCriacao; }
 }

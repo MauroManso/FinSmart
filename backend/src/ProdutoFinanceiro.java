@@ -10,11 +10,10 @@ public class ProdutoFinanceiro {
     private String descricao;
     private boolean ativo;
 
-    // Construtor padrão
     public ProdutoFinanceiro() {
+        this.ativo = true;
     }
 
-    // Construtor com parâmetros
     public ProdutoFinanceiro(int idProduto, String nomeProduto, String tipo,
                               BigDecimal taxaBase, String descricao) {
         this.idProduto = idProduto;
@@ -25,34 +24,33 @@ public class ProdutoFinanceiro {
         this.ativo = true;
     }
 
-    // Cadastra um novo produto financeiro no catálogo
     public void cadastrarProduto() {
         System.out.println("Cadastrando produto financeiro: " + nomeProduto);
     }
 
-    // Ativa o produto para contratação pelas empresas
     public void ativarProduto() {
+        this.ativo = true;
         System.out.println("Ativando produto financeiro: " + nomeProduto);
     }
 
-    // Desativa o produto impedindo novas contratações
     public void desativarProduto() {
+        this.ativo = false;
         System.out.println("Desativando produto financeiro: " + nomeProduto);
     }
 
-    // Atualiza a taxa base do produto
     public void atualizarTaxaBase(BigDecimal novaTaxa) {
+        if (novaTaxa != null && novaTaxa.compareTo(BigDecimal.ZERO) >= 0) {
+            this.taxaBase = novaTaxa;
+        }
         System.out.println("Atualizando taxa base do produto " + nomeProduto
                 + " para: " + novaTaxa + "%");
     }
 
-    // Lista todos os produtos disponíveis por tipo
     public static List<ProdutoFinanceiro> listarPorTipo(String tipo) {
         System.out.println("Listando produtos financeiros do tipo: " + tipo);
         return null;
     }
 
-    // Getters e Setters
     public int getIdProduto() { return idProduto; }
     public void setIdProduto(int idProduto) { this.idProduto = idProduto; }
 

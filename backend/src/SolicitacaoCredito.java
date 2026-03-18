@@ -13,11 +13,11 @@ public class SolicitacaoCredito {
     private LocalDateTime dataAnalise;
     private int scoreCredito;
 
-    // Construtor padrão
     public SolicitacaoCredito() {
+        this.statusAprovacao = "pendente";
+        this.dataSolicitacao = LocalDateTime.now();
     }
 
-    // Construtor com parâmetros
     public SolicitacaoCredito(int idSolicitacao, int idEmpresa,
                                BigDecimal valorSolicitado, int prazoMeses) {
         this.idSolicitacao = idSolicitacao;
@@ -28,34 +28,36 @@ public class SolicitacaoCredito {
         this.dataSolicitacao = LocalDateTime.now();
     }
 
-    // Registra a solicitação de crédito da empresa
     public void registrarSolicitacao() {
         System.out.println("Registrando solicitação de crédito de R$ " + valorSolicitado
                 + " para a empresa ID: " + idEmpresa);
     }
 
-    // Aprova a solicitação de crédito
     public void aprovar() {
+        this.statusAprovacao = "aprovada";
+        this.dataAnalise = LocalDateTime.now();
         System.out.println("Aprovando solicitação de crédito ID: " + idSolicitacao);
     }
 
-    // Rejeita a solicitação de crédito
     public void rejeitar() {
+        this.statusAprovacao = "rejeitada";
+        this.dataAnalise = LocalDateTime.now();
         System.out.println("Rejeitando solicitação de crédito ID: " + idSolicitacao);
     }
 
-    // Cancela a solicitação de crédito
     public void cancelar() {
+        this.statusAprovacao = "cancelada";
         System.out.println("Cancelando solicitação de crédito ID: " + idSolicitacao);
     }
 
-    // Calcula o score de crédito da empresa com base nos dados disponíveis
     public int calcularScore() {
+        if (valorSolicitado != null) {
+            this.scoreCredito = valorSolicitado.compareTo(new BigDecimal("100000")) > 0 ? 680 : 760;
+        }
         System.out.println("Calculando score de crédito para empresa ID: " + idEmpresa);
         return this.scoreCredito;
     }
 
-    // Getters e Setters
     public int getIdSolicitacao() { return idSolicitacao; }
     public void setIdSolicitacao(int idSolicitacao) { this.idSolicitacao = idSolicitacao; }
 

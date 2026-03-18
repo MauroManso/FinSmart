@@ -11,11 +11,10 @@ public class Contrato {
     private LocalDate dataFim;
     private String status; // "ativo", "encerrado", "suspenso"
 
-    // Construtor padrão
     public Contrato() {
+        this.status = "ativo";
     }
 
-    // Construtor com parâmetros
     public Contrato(int idContrato, int idEmpresa, int idProduto,
                     BigDecimal valorContratado, LocalDate dataInicio, LocalDate dataFim) {
         this.idContrato = idContrato;
@@ -27,28 +26,29 @@ public class Contrato {
         this.status = "ativo";
     }
 
-    // Formaliza a contratação do produto financeiro pela empresa
     public void assinarContrato() {
+        this.status = "ativo";
         System.out.println("Assinando contrato do produto ID " + idProduto
                 + " para a empresa ID: " + idEmpresa);
     }
 
-    // Suspende temporariamente o contrato
     public void suspenderContrato() {
+        this.status = "suspenso";
         System.out.println("Suspendendo contrato ID: " + idContrato);
     }
 
-    // Encerra definitivamente o contrato
     public void encerrarContrato() {
+        this.status = "encerrado";
+        this.dataFim = LocalDate.now();
         System.out.println("Encerrando contrato ID: " + idContrato);
     }
 
-    // Renova o contrato com nova data de fim
     public void renovarContrato(LocalDate novaDataFim) {
+        this.status = "ativo";
+        this.dataFim = novaDataFim;
         System.out.println("Renovando contrato ID: " + idContrato + " até: " + novaDataFim);
     }
 
-    // Getters e Setters
     public int getIdContrato() { return idContrato; }
     public void setIdContrato(int idContrato) { this.idContrato = idContrato; }
 

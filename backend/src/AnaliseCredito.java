@@ -11,11 +11,11 @@ public class AnaliseCredito {
     private LocalDateTime dataAnalise;
     private int idUsuarioAnalista; // FK - analista responsável
 
-    // Construtor padrão
     public AnaliseCredito() {
+        this.dataAnalise = LocalDateTime.now();
+        this.riscoScore = BigDecimal.ZERO;
     }
 
-    // Construtor com parâmetros
     public AnaliseCredito(int idAnalise, int idSolicitacao, int idUsuarioAnalista) {
         this.idAnalise = idAnalise;
         this.idSolicitacao = idSolicitacao;
@@ -23,29 +23,30 @@ public class AnaliseCredito {
         this.dataAnalise = LocalDateTime.now();
     }
 
-    // Executa a análise de crédito usando IA
     public void executarAnalise() {
+        this.resultadoIa = "analise_em_andamento";
+        this.dataAnalise = LocalDateTime.now();
         System.out.println("Executando análise de crédito para a solicitação ID: " + idSolicitacao);
     }
 
-    // Calcula o score de risco com base nos dados alternativos
     public BigDecimal calcularRiscoScore() {
+        if (this.riscoScore == null) {
+            this.riscoScore = BigDecimal.ZERO;
+        }
         System.out.println("Calculando risco score para a solicitação ID: " + idSolicitacao);
         return this.riscoScore;
     }
 
-    // Registra o resultado da análise feita pela IA
     public void registrarResultadoIa(String resultado) {
+        this.resultadoIa = resultado;
         System.out.println("Registrando resultado da IA para análise ID: " + idAnalise);
     }
 
-    // Consulta o resultado da análise
     public String consultarResultado() {
         System.out.println("Consultando resultado da análise ID: " + idAnalise);
         return this.resultadoIa;
     }
 
-    // Getters e Setters
     public int getIdAnalise() { return idAnalise; }
     public void setIdAnalise(int idAnalise) { this.idAnalise = idAnalise; }
 

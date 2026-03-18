@@ -11,11 +11,12 @@ public class Conta {
     private LocalDateTime dataAbertura;
     private String status; // "ativa", "bloqueada", "encerrada"
 
-    // Construtor padrão
     public Conta() {
+        this.saldo = BigDecimal.ZERO;
+        this.dataAbertura = LocalDateTime.now();
+        this.status = "ativa";
     }
 
-    // Construtor com parâmetros
     public Conta(int idConta, String numeroConta, int idEmpresa, String tipoConta) {
         this.idConta = idConta;
         this.numeroConta = numeroConta;
@@ -26,38 +27,40 @@ public class Conta {
         this.status = "ativa";
     }
 
-    // Abre uma nova conta digital para a empresa
     public void abrirConta() {
+        this.status = "ativa";
         System.out.println("Abrindo conta para a empresa ID: " + idEmpresa);
     }
 
-    // Bloqueia a conta impedindo movimentações
     public void bloquearConta() {
+        this.status = "bloqueada";
         System.out.println("Bloqueando conta número: " + numeroConta);
     }
 
-    // Encerra a conta definitivamente
     public void encerrarConta() {
+        this.status = "encerrada";
         System.out.println("Encerrando conta número: " + numeroConta);
     }
 
-    // Realiza um depósito na conta
     public void depositar(BigDecimal valor) {
+        if (valor != null && valor.compareTo(BigDecimal.ZERO) > 0) {
+            this.saldo = this.saldo.add(valor);
+        }
         System.out.println("Depositando R$ " + valor + " na conta: " + numeroConta);
     }
 
-    // Realiza um saque na conta
     public void sacar(BigDecimal valor) {
+        if (valor != null && valor.compareTo(BigDecimal.ZERO) > 0 && this.saldo.compareTo(valor) >= 0) {
+            this.saldo = this.saldo.subtract(valor);
+        }
         System.out.println("Realizando saque de R$ " + valor + " da conta: " + numeroConta);
     }
 
-    // Consulta o saldo atual da conta
     public BigDecimal consultarSaldo() {
         System.out.println("Consultando saldo da conta: " + numeroConta);
         return this.saldo;
     }
 
-    // Getters e Setters
     public int getIdConta() { return idConta; }
     public void setIdConta(int idConta) { this.idConta = idConta; }
 
@@ -77,5 +80,9 @@ public class Conta {
     public void setDataAbertura(LocalDateTime dataAbertura) { this.dataAbertura = dataAbertura; }
 
     public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setStatus(String status) {
+        if (status != null && !status.isBlank()) {
+            this.status = status;
+        }
+    }
 }
