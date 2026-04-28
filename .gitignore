@@ -1,0 +1,12 @@
+.env
+.DS_Store
+.idea/
+*.iml
+out/
+backend/out/
+lib/
+*.jar
+.venv/
+__pycache__/
+*.pyc
+.vscode/
